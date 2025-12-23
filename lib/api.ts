@@ -10,6 +10,56 @@ interface ApiResponse<T> {
   message?: string;
 }
 
+
+// 
+
+// Add these functions to lib/api.ts
+
+const API_KEY_STORAGE_KEY = 'minimax_api_key';
+
+export function setUserApiKey(key: string): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(API_KEY_STORAGE_KEY, key);
+  }
+}
+
+export function getUserApiKey(): string | null {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem(API_KEY_STORAGE_KEY);
+  }
+  return null;
+}
+
+function getApiKey(): string | null {
+  // First check localStorage for user-provided key
+  const userKey = getUserApiKey();
+  if (userKey) return userKey;
+  
+  // Fall back to environment variable
+  const envKey = process.env.NEXT_PUBLIC_MINIMAX_API_KEY;
+  if (envKey && envKey !== 'undefined') return envKey;
+  
+  return null;
+}
+
+// Then update your callEdgeFunction to use getApiKey():
+async function callEdgeFunction<T>(functionName: string, payload: any): Promise<ApiResponse<T>> {
+  const apiKey = getApiKey();
+  
+  if (!apiKey) {
+    return {
+      error: 'Configuration error',
+      message: 'MiniMax API key is not configured',
+    };
+  }
+
+  // ... rest of the function, use apiKey instead of MINIMAX_API_KEY
+  body: JSON.stringify({ ...payload, apiKey }),
+}
+
+
+// 
+
 function validateEnvironment(): { isValid: boolean; message?: string } {
   if (!SUPABASE_URL) {
     return {
