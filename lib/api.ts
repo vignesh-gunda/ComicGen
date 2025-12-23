@@ -23,12 +23,6 @@ function validateEnvironment(): { isValid: boolean; message?: string } {
       message: 'NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured. Please check your .env file.',
     };
   }
-  if (!MINIMAX_API_KEY || MINIMAX_API_KEY === 'undefined') {
-    return {
-      isValid: false,
-      message: 'NEXT_PUBLIC_MINIMAX_API_KEY is not configured. Please check your .env file and restart the development server.',
-    };
-  }
   return { isValid: true };
 }
 
