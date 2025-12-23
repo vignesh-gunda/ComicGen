@@ -19,7 +19,7 @@ export function Briefing() {
   const [showEnvWarning, setShowEnvWarning] = useState(false);
 
   useEffect(() => {
-    const apiKey = process.env.NEXT_PUBLIC_MINIMAX_API_KEY;
+    const apiKey = process.env.MINIMAX_API_KEY;
     console.log('[MotionManga] Environment Check:', {
       hasApiKey: !!apiKey && apiKey !== 'undefined',
       apiKeyLength: apiKey?.length || 0,
