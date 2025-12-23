@@ -2,7 +2,7 @@ import { PanelScript } from './types';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY!};
+const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY!;
 
 interface ApiResponse<T> {
   data?: T;
