@@ -119,8 +119,9 @@
 
 import { PanelScript } from './types';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// Hardcoded Supabase configuration
+const SUPABASE_URL = 'https://byjgwaykvgbmztecggzk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5amd3YXlrdmdibXp0ZWNnZ3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyNzQ0NjMsImV4cCI6MjA4MTg1MDQ2M30.WwHpFEurX1SEdy8FETJz1njNEXpOIvOxMBfpDP2mPnM';
 
 // localStorage key for user-provided API key
 const API_KEY_STORAGE_KEY = 'minimax_api_key';
@@ -167,20 +168,8 @@ function getApiKey(): string | null {
 }
 
 function validateEnvironment(): { isValid: boolean; message?: string } {
-  if (!SUPABASE_URL) {
-    return {
-      isValid: false,
-      message: 'NEXT_PUBLIC_SUPABASE_URL is not configured. Please check your .env file.',
-    };
-  }
-
-  if (!SUPABASE_ANON_KEY) {
-    return {
-      isValid: false,
-      message: 'NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured. Please check your .env file.',
-    };
-  }
-
+  // Supabase values are now hardcoded, so no need to validate them
+  
   const apiKey = getApiKey();
   if (!apiKey) {
     return {
